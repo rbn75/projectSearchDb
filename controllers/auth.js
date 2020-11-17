@@ -10,11 +10,11 @@ exports.signupViewEmployer = (req, res) => res.render('auth/signupemployer')
 exports.signupProcessGuest = async (req, res) => {
   const { email, password } = req.body
   if (!email || !password) {
-    return res.render('auth/signup', { erroMessage: 'indicate email and password' })
+    return res.render('auth/signup', { errorMessage: 'indicate email and password' })
   }
   const user = await User.findOne({ email })
   if (user) {
-    return res.render('auth/signup', { erroMessage: 'error' })
+    return res.render('auth/signup', { errorMessage: 'error' })
   }
   const salt = bcrypt.genSaltSync(12)
   const hashPass = bcrypt.hashSync(password, salt)
@@ -32,11 +32,11 @@ exports.signupProcessGuest = async (req, res) => {
 exports.signupProcessEmployer = async (req, res) => {
   const { email, password ,} = req.body
   if (!email || !password) {
-    return res.render('auth/signupemployer', { erroMessage: 'indicate email and password' })
+    return res.render('auth/signupemployer', { errorMessage: 'indicate email and password' })
   }
   const user = await User.findOne({ email })
   if (user) {
-    return res.render('auth/signupemployer', { erroMessage: 'error' })
+    return res.render('auth/signupemployer', { errorMessage: 'error' })
   }
   const salt = bcrypt.genSaltSync(12)
   const hashPass = bcrypt.hashSync(password, salt)
@@ -58,10 +58,34 @@ exports.loginView = (req, res) => {
   exports.loginProcess = passport.authenticate('local', {
     // here is problem redirect to private view
     
-    successRedirect: '/',
+    successRedirect: '/guest',
     failureRedirect: '/login',
-    failureFlash:true
+    failureFlash:true,
   }),
+
+// new logins
+
+  exports.loginViewEmployer = (req, res) => {
+    res.render('auth/login', {'errorMessage':req.flash('error')})
+  
+  },
+  // the one working
+    exports.loginProcessEmployer = passport.authenticate('local', {
+      // here is problem redirect to private view
+      
+      successRedirect: '/employer',
+      failureRedirect: '/login',
+      failureFlash:true,
+    }),
+  
+  // exports.loginProcess = passport.authenticate('local', {
+  //   if(req.user.rol === 'guest'){
+  //     res.redirect('/guest')
+  //   }
+  //   else if(req.user.rol==='employer'){
+  //     res.redirect('/employer')
+  //   }
+  // }),
 
 
 
@@ -81,10 +105,7 @@ exports.loginView = (req, res) => {
     res.render('private')
   }
 
-  // middleware set up,something missing...
-  // exports.privatePage= (req, res)=> {
-  //   res.render('private')
-  // }
+ 
  
 
   exports.logout=(req, res)=>{
