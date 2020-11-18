@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { signupView, signupProcessGuest, loginView, loginProcess,
   privatePage, logout, testView, guestView, employerView,
-  signupViewEmployer, signupProcessEmployer,loginViewEmployer, loginProcessEmployer } = require('../controllers/auth')
+  signupViewEmployer, signupProcessEmployer,loginViewEmployer,
+   loginProcessEmployer, googleInit, googleCb} = require('../controllers/auth')
 const passport = require('../config/passport');
 const { route } = require('../app');
 
@@ -30,11 +31,12 @@ router.get('/login', isNotAuth, loginView)
 // router.get('/login',loginView ) added middleware
 router.post('/login', isNotAuth, loginProcess)
 
-
 // testin logins
 router.get('/loginemployer', isNotAuth, loginViewEmployer)
 router.post('/loginemployer', isNotAuth, loginProcessEmployer)
-
+// routes for google
+router.get('/auth/google', googleInit )
+router.get('/auth/google/callback', googleCb)
 
 
 

@@ -13,8 +13,10 @@ const flash=require('connect-flash');
 
 
 
+
+
 mongoose
-  .connect(process.env.DB || 'mongodb://localhost/template', {useNewUrlParser: true,useUnifiedTopology:true,})
+  .connect(process.env.DB || 'mongodb://localhost/template', {useNewUrlParser: true,useUnifiedTopology:true, })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -59,6 +61,7 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 
 const index = require('./routes/index');
+const { session } = require('./config/passport');
 app.use('/', index);
 
 

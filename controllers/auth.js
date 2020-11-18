@@ -110,7 +110,7 @@ exports.loginView = (req, res) => {
 
   exports.logout=(req, res)=>{
     req.logout()
-    res.redirect('/login')
+    res.redirect('/')
   }
 
   // functions-controllers for new views
@@ -120,5 +120,18 @@ exports.loginView = (req, res) => {
   exports.employerView=(req, res)=>{
     res.render('employer')
   }
+
+exports.googleInit=passport.authenticate('google',{
+  scope: [
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/userinfo.email"
+  ]
+})
+
+exports.googleCb=passport.authenticate('google', {
+successRedirect:'/guest',
+failureRedirect:'/login',
+})
+
 
   exports.testView = (req, res) => res.render('test')
