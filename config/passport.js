@@ -36,7 +36,17 @@ passport.use(new GoogleStrategy({
   clientID:process.env.GOOGLE_ID,
   clientSecret:process.env.GOOGLE_SECRET,
   callbackURL:'/auth/google/callback',
-}, (_, __, profile, done)=>{
+},async(_, __, profile, done)=>{
+  const user=await User.findOne({GOOGLE_ID:profile.id})
+  if (user){
+    return done(null,user)
+  }
+  const newUser=await User.create({
+    GOOGLE_ID:profile.id,
+    email: profile.emails[0].value
+  })
+  done(null, newUser)
+
 
 }))
 

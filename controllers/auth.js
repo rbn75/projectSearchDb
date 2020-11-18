@@ -129,7 +129,7 @@ exports.googleInit=passport.authenticate('google',{
 })
 
 exports.googleCb=passport.authenticate('google', {
-successRedirect:'/',  //problem here to redirect
+successRedirect:'/guest',  //problem here to redirect
 failureRedirect:'/login',
 })
 
