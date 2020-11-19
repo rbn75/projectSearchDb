@@ -134,4 +134,10 @@ failureRedirect:'/login',
 })
 
 
-  exports.testView = (req, res) => res.render('test')
+  exports.myAccountView = (req, res) => res.render('myAccount')
+
+  exports.addJobsView=(req, res)=>res.render('addjob')
+
+  exports.updateView=(req,res)=>res.render('update-job')
+
+

@@ -1,43 +1,43 @@
-<h2>welcome to the guest site</h2>
+<h2>test</h2>
 
-<header>
+
+
+ <header>
         <nav class="navbar navbar-expand-md navbar-dark">
-            <a class="navbar-brand" href="#"></i>
-                ALIJOBS</a>
+            <a class="navbar-brand" href="/index.html"><i class="fas fa-kiwi-bird"></i>HUSTLE JOBS</a>
             <!-- nav bar toggle button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
             <!-- nav bar menu collapsed -->
             <ul class="navbar-nav mr-auto">
                     
+                    
                     <li class="nav-item">
-                        <a href="/account">My Account</a>
+                        <a href="addjob">Post New Job</a>
                     </li>
                 </ul>
         </nav>
     </header>
 
-
-
-<main>
-        <div class="hero container">
-            <ol class="hero-list">
-                <li>Hustle Up.</li>
-                <li>Get Paid.</li>
-            </ol>   
+    <main>
+        <div class="account-hero container">
+            <div>
+                <h1>My Account</h1>
+                <p>View, update and delete any jobs you posted.</p>
+                <p>You've posted <span id="job-count"></span> job(s).</p>
+                <a class="add-job-link" href="addjob">Post New Job</a>
+            </div>
+            <div class="account-hero-image"></div>
         </div>
         
-        <div class="container">
-            <h1 id="job-count-wrapper"><span id="job-count">0</span> jobs in your area:</h1>
-        </div>
-
         <div class="job-board-wrapper">
             <div class="job-board container">
                 <div id="job-card-mount"></div>
             </div>
         </div>
 
-        <div class="hero-two container">
-            <span class="hero-two-text">Your hustle, your money</span>
+        <div class="account-buttons-wrapper container">
+            <button class="delete btn btn-danger btn-lg" id="clearData">Delete All Jobs</button>
         </div>
+
     </main>

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { signupView, signupProcessGuest, loginView, loginProcess,
-  privatePage, logout, testView, guestView, employerView,
-  signupViewEmployer, signupProcessEmployer,loginViewEmployer,
+  privatePage, logout, myAccountView , guestView, updateView, employerView,
+  signupViewEmployer, signupProcessEmployer,loginViewEmployer, addJobsView,
    loginProcessEmployer, googleInit, googleCb} = require('../controllers/auth')
 const passport = require('../config/passport');
 const { route } = require('../app');
@@ -54,8 +54,10 @@ router.get('/logout', logout)
 
 
 // testing routes
-router.get('/test', testView)
+router.get('/account', myAccountView )
 router.get('/private', isAuth, privatePage)
+router.get('/addjob', addJobsView)
+router.get('/update', updateView)
 
 
 
