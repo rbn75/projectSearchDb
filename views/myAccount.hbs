@@ -1,23 +1,5 @@
-<h2>test</h2>
+{{!-- <a href="addjob">Post New Job</a> --}}
 
-
-
- <header>
-        <nav class="navbar navbar-expand-md navbar-dark">
-            <a class="navbar-brand" href="/index.html"><i class="fas fa-kiwi-bird"></i>HUSTLE JOBS</a>
-            <!-- nav bar toggle button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
-            <!-- nav bar menu collapsed -->
-            <ul class="navbar-nav mr-auto">
-                    
-                    
-                    <li class="nav-item">
-                        <a href="addjob">Post New Job</a>
-                    </li>
-                </ul>
-        </nav>
-    </header>
 
     <main>
         <div class="account-hero container">
@@ -25,7 +7,7 @@
                 <h1>My Account</h1>
                 <p>View, update and delete any jobs you posted.</p>
                 <p>You've posted <span id="job-count"></span> job(s).</p>
-                <a class="add-job-link" href="addjob">Post New Job</a>
+                
             </div>
             <div class="account-hero-image"></div>
         </div>
@@ -35,6 +17,10 @@
                 <div id="job-card-mount"></div>
             </div>
         </div>
+        <div class="account-buttons-wrapper container">
+            <button class="delete btn btn-danger btn-lg"><a href="addjob">Post New Job</a></button>
+        </div>
+        <br>
 
         <div class="account-buttons-wrapper container">
             <button class="delete btn btn-danger btn-lg" id="clearData">Delete All Jobs</button>
