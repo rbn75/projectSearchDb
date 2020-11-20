@@ -54,7 +54,7 @@ exports.loginView = (req, res) => {
   res.render('auth/login', {'errorMessage':req.flash('error')})
 
 },
-// the one working
+// the one working good.
   exports.loginProcess = passport.authenticate('local', {
     // here is problem redirect to private view
     
