@@ -1,39 +1,152 @@
-<h2>add job page</h2>
+
+{{!-- testing crud --}}
+
+<div class="container add-job-wrapper">
+    <br>
+    <h2>ADD JOBS IN HERE</h2>
 
 
+    {{!-- <a href="guest">My Account</a> --}}
+    <div class="form-wrapper">
+        <div class="form-hero">
+            <form name="add-form" action="javascript:void(0);" method="POST" onsubmit="app.Add()">
+                <label for="name">Job Description</label>
+                <input type="text" id="add-name" class="form-control" placeholder="job description">
+                <br>
+                <input type="submit" value="Add" class="btn btn-primary btn-lg">
+            </form>
 
 
-<a href="guest">My Account</a>
-        <main>
-        <div class="container add-job-wrapper">
-            <div class="form-wrapper">
-                <h1>Add New Job</h1>
-        
-                <form name="add-form">
-                    <div class="form-group">
-                        <label for="name">Job Description</label>
-                        <input type="text" name="name" id="name" class="form-control">
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="location">Job Location</label>
-                        <input type="text" name="location" id="location" class="form-control">
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="duration">Expected Job Duration (whole hours only)</label>
-                        <input type="number" name="duration" id="duration" class="form-control">
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="cashAmount">Total Pay</label>
-                        <input type="number" name="cashAmount" id="cashAmount" class="form-control">
-                    </div>
-        
-                    <button type="reset" class="btn btn-secondary btn-lg">Reset</button>
-                    <button type="submit" class="btn btn-primary btn-lg">Add Job</button>
+            <div id="spoiler" role="aria-hidden">
+                <form action="javascript:void(0);" method="POST" id="saveEdit">
+                    <label for="job">Job modified</label>
+                    <input type="text" id="edit-name" class="form-control">
+                    <br>
+                    <input type="submit" class="btn btn-primary btn-lg" value="Edit" /> <a onclick="CloseInput()"
+                        aria-label="Close">&#10006;</a>
                 </form>
             </div>
-            <div class="form-hero"></div>
+
+            <p id="counter"></p>
+
+            <table>
+                <tr>
+                    <th>Name</th>
+                </tr>
+                <tbody id="jobs">
+                </tbody>
+            </table>
+
+
         </div>
-    </main>
+
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    var app = new function () {
+
+        this.el = document.getElementById('jobs');
+
+        this.jobs = ['DEVELOPER CHINA', 'FULL STACK DEVELOPER'];
+
+        this.Count = function (data) {
+            var el = document.getElementById('counter');
+            var name = 'jobs';
+
+            if (data) {
+                if (data > 1) {
+                    name = 'jobs';
+                }
+                el.innerHTML = data + ' ' + name;
+            } else {
+                el.innerHTML = 'No ' + name;
+            }
+        };
+
+        this.FetchAll = function () {
+            var data = '';
+
+            if (this.jobs.length > 0) {
+                for (i = 0; i < this.jobs.length; i++) {
+                    data += '<tr>';
+                    data += '<td>' + this.jobs[i] + '</td>';
+                    data += '<td><button class="btn btn-primary btn-lg" onclick="app.Edit(' + i + ')">Edit</button></td>';
+                    data += '<td><button class="btn btn-primary btn-lg" onclick="app.Delete(' + i + ')">Delete</button></td>';
+                    data += '</tr>';
+                }
+            }
+
+            this.Count(this.jobs.length);
+            return this.el.innerHTML = data;
+        };
+
+        this.Add = function () {
+            el = document.getElementById('add-name');
+            
+            var jobs = el.value;
+
+            if (jobs) {
+              
+                this.jobs.push(jobs.trim());
+                // Reset input value
+                el.value = '';
+                // Dislay the new list
+                this.FetchAll();
+            }
+        };
+
+        this.Edit = function (item) {
+            var el = document.getElementById('edit-name');
+            // Display value in the field
+            el.value = this.jobs[item];
+            // Display fields
+            document.getElementById('spoiler').style.display = 'block';
+            self = this;
+
+            document.getElementById('saveEdit').onsubmit = function () {
+                // Get value
+                var jobs = el.value;
+
+                if (jobs) {
+                    // Edit value
+                    self.jobs.splice(item, 1, jobs.trim());
+                    // Display the new list
+                    self.FetchAll();
+                    // Hide fields
+                    CloseInput();
+                }
+            }
+        };
+
+        this.Delete = function (item) {
+            // Delete the current row
+            this.jobs.splice(item, 1);
+            // Display the new list
+            this.FetchAll();
+        };
+
+    }
+
+    app.FetchAll();
+
+    function CloseInput() {
+        document.getElementById('spoiler').style.display = 'none';
+    }
+</script>

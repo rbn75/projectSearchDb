@@ -23,7 +23,7 @@ exports.signupProcessGuest = async (req, res) => {
     password: hashPass,
     
   })
-  res.redirect('/login')
+  res.redirect('/guest')
 }
 
 // New signup process for employer
@@ -46,7 +46,7 @@ exports.signupProcessEmployer = async (req, res) => {
     role:'employer',
     
   })
-  res.redirect('/login')
+  res.redirect('/employer')
 }
 
 
